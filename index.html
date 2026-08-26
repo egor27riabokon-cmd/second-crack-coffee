@@ -289,8 +289,8 @@
   #hopperLight{ stop-color: color-mix(in srgb, var(--accent) 35%, var(--surface-2)); }
   #hopperDark{ stop-color: var(--surface-2); }
   .grinder-body{ fill: url(#grinderBodyGrad); }
-  #grinderLight{ stop-color: color-mix(in srgb, white 14%, var(--surface-2)); }
-  #grinderDark{ stop-color: color-mix(in srgb, var(--ink) 22%, var(--surface-2)); }
+  #grinderLight{ stop-color: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
+  #grinderDark{ stop-color: color-mix(in srgb, var(--ink) 34%, var(--surface-2)); }
   .grinder-highlight{ fill: rgba(255,255,255,0.16); }
   .chute{ fill: color-mix(in srgb, var(--ink) 20%, var(--surface-2)); }
   .grinder-shadow{ fill: rgba(20,12,6,0.2); }
@@ -822,13 +822,13 @@
   if (heroBeans) {
     var vb = { x: 0, y: 0, w: 600, h: 600 };
     var ring = [
-      { rMin: 110, rMax: 165, sMin: 0.34, sMax: 0.5, op: 1 },
-      { rMin: 165, rMax: 215, sMin: 0.22, sMax: 0.34, op: 0.7 },
-      { rMin: 215, rMax: 250, sMin: 0.13, sMax: 0.22, op: 0.4 }
+      { rMin: 105, rMax: 170, sMin: 0.34, sMax: 0.52, op: 1 },
+      { rMin: 165, rMax: 225, sMin: 0.22, sMax: 0.36, op: 0.72 },
+      { rMin: 215, rMax: 260, sMin: 0.13, sMax: 0.23, op: 0.42 }
     ];
     var cx = vb.w * 0.52, cy = vb.h * 0.54;
     ring.forEach(function(band, bi){
-      var count = bi === 0 ? 9 : (bi === 1 ? 12 : 10);
+      var count = bi === 0 ? 14 : (bi === 1 ? 18 : 15);
       for (var i = 0; i < count; i++){
         var a = -100 + Math.random() * 200; // degrees; keep mostly right/around, away from the text column
         var rad = a * Math.PI / 180;
