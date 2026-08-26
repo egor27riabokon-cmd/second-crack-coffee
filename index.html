@@ -1,0 +1,909 @@
+<title>Second Crack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #F1EAD9;
+    --surface: #FBF7EE;
+    --surface-2: #F5EEDF;
+    --ink: #241C17;
+    --muted: #6B5D4F;
+    --accent: #8A5D1D;
+    --accent-strong: #6E4A16;
+    --accent-ink: #FFFFFF;
+    --accent-2: #8C3229;
+    --line: #DBCDAE;
+    --shadow: 0 20px 40px -24px rgba(36,28,23,0.35);
+
+    --font-display: "Fraunces", "Iowan Old Style", ui-serif, Georgia, serif;
+    --font-body: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #1B1512;
+      --surface: #241C17;
+      --surface-2: #2C221B;
+      --ink: #F3EDE4;
+      --muted: #B8A99A;
+      --accent: #D2A24C;
+      --accent-strong: #E3B968;
+      --accent-ink: #1B1512;
+      --accent-2: #C1584B;
+      --line: #3A2E27;
+      --shadow: 0 24px 48px -20px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #1B1512;
+    --surface: #241C17;
+    --surface-2: #2C221B;
+    --ink: #F3EDE4;
+    --muted: #B8A99A;
+    --accent: #D2A24C;
+    --accent-strong: #E3B968;
+    --accent-ink: #1B1512;
+    --accent-2: #C1584B;
+    --line: #3A2E27;
+    --shadow: 0 24px 48px -20px rgba(0,0,0,0.55);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+  img, svg{ display: block; max-width: 100%; }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px);
+  }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1, h2, h3{
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p{ margin: 0; }
+
+  .measure{ max-width: 62ch; }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- Header ---------- */
+  header.site{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px clamp(20px, 5vw, 56px);
+  }
+  .mark{
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .mark em{ font-style: italic; color: var(--accent); }
+  .nav-links{
+    display: flex;
+    gap: clamp(16px, 3vw, 32px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+  .nav-links a{
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 200ms ease;
+  }
+  .nav-links a:hover{ color: var(--ink); }
+  @media (max-width: 640px){ .nav-links{ display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    padding: clamp(48px, 9vw, 108px) 0 clamp(56px, 8vw, 96px);
+    overflow: hidden;
+  }
+  #steam{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .hero-grid{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 6vw, 72px);
+    align-items: center;
+  }
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 5vw, 3.7rem);
+    line-height: 1.08;
+    margin-top: 14px;
+  }
+  .hero h1 i{ color: var(--accent); font-style: italic; }
+  .hero-sub{
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 46ch;
+  }
+  .cta-row{
+    display: flex;
+    gap: 14px;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 180ms ease, background 200ms ease, border-color 200ms ease;
+  }
+  .btn:active{ transform: translateY(1px); }
+  .btn-solid{
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-solid:hover{ background: var(--accent-strong); }
+  .btn-line{
+    background: transparent;
+    border-color: var(--line);
+    color: var(--ink);
+  }
+  .btn-line:hover{ border-color: var(--accent); }
+
+  /* ---------- Bean symbol (shared) ---------- */
+  .bean-defs{ position: absolute; width: 0; height: 0; overflow: hidden; }
+  .bean-use{
+    fill: url(#beanGrad);
+    filter: drop-shadow(0 3px 4px rgba(20,12,6,0.35));
+  }
+
+  /* ---------- Hero cup illustration ---------- */
+  .hero-art{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+  }
+  .bean-field{
+    position: absolute;
+    inset: -10% -10%;
+    width: 120%;
+    height: 120%;
+    z-index: 1;
+    overflow: visible;
+  }
+  .cup-illustration{
+    position: relative;
+    z-index: 3;
+    width: min(300px, 62vw);
+    filter: drop-shadow(0 30px 26px rgba(20,12,6,0.32));
+  }
+  .cup-body{ fill: url(#cupBodyGrad); }
+  .cup-handle{ fill: none; stroke: url(#cupBodyGrad); stroke-width: 15; stroke-linecap: round; }
+  .cup-rim{ fill: none; stroke: color-mix(in srgb, var(--ink) 14%, var(--surface)); stroke-width: 2; opacity: 0.6; }
+  .crema{ fill: url(#cremaGrad); }
+  .crema-shine{ fill: rgba(255,255,255,0.38); }
+  .saucer-shadow{ fill: rgba(20,12,6,0.18); }
+  #cupLight{ stop-color: var(--surface); }
+  #cupDark{ stop-color: color-mix(in srgb, var(--ink) 16%, var(--surface)); }
+  #cremaLight{ stop-color: var(--accent-strong); }
+  #cremaDark{ stop-color: var(--accent); }
+  #beanLight{ stop-color: var(--accent-strong); }
+  #beanDark{ stop-color: color-mix(in srgb, var(--ink) 70%, var(--accent-strong)); }
+
+  /* ---------- Sections ---------- */
+  section{ padding: clamp(56px, 9vw, 104px) 0; }
+  .section-head{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: clamp(32px, 5vw, 52px);
+  }
+  .section-head h2{ font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+
+  /* ---------- The Grinder ---------- */
+  .grinder-scene{
+    background: var(--surface-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .grinder-grid{
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(28px, 6vw, 64px);
+    align-items: center;
+  }
+  @media (max-width: 860px){
+    .grinder-grid{ grid-template-columns: 1fr; }
+    .grinder-grid{ text-align: center; }
+  }
+  .grinder-illustration{
+    width: min(280px, 60vw);
+    margin: 0 auto;
+    filter: drop-shadow(0 26px 24px rgba(20,12,6,0.3));
+    overflow: visible;
+  }
+  .hopper{ fill: url(#hopperGrad); }
+  .hopper-mouth{ fill: color-mix(in srgb, var(--ink) 30%, var(--surface-2)); }
+  #hopperLight{ stop-color: color-mix(in srgb, var(--accent) 35%, var(--surface-2)); }
+  #hopperDark{ stop-color: var(--surface-2); }
+  .grinder-body{ fill: url(#grinderBodyGrad); }
+  #grinderLight{ stop-color: color-mix(in srgb, white 14%, var(--surface-2)); }
+  #grinderDark{ stop-color: color-mix(in srgb, var(--ink) 22%, var(--surface-2)); }
+  .grinder-highlight{ fill: rgba(255,255,255,0.16); }
+  .chute{ fill: color-mix(in srgb, var(--ink) 20%, var(--surface-2)); }
+  .grinder-shadow{ fill: rgba(20,12,6,0.2); }
+  .crank{ transform-box: fill-box; transform-origin: center; }
+  .crank-body{ fill: url(#grinderBodyGrad); }
+  .crank-arm{ stroke: var(--accent-strong); stroke-width: 6; stroke-linecap: round; }
+  .crank-knob{ fill: var(--accent); }
+  @media (prefers-reduced-motion: no-preference){
+    .crank{ animation: spin 7s linear infinite; }
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+  .grind-pile .bean-use{ filter: drop-shadow(0 2px 3px rgba(20,12,6,0.3)); }
+
+  /* Philosophy */
+  .philosophy{ border-top: 1px solid var(--line); }
+  .philosophy-body{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 6vw, 64px);
+  }
+  @media (max-width: 760px){ .philosophy-body{ grid-template-columns: 1fr; } }
+  .philosophy-body p + p{ margin-top: 16px; }
+  blockquote{
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    line-height: 1.4;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding-left: 22px;
+  }
+  blockquote cite{
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Menu / Flight */
+  .flight{ background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .flight-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 700px){ .flight-grid{ grid-template-columns: 1fr; } }
+  .flight-card{
+    background: var(--surface);
+    padding: 28px 26px;
+    transform-style: preserve-3d;
+    transform: perspective(900px) rotateX(10deg) translateY(26px);
+    opacity: 0;
+    transition: opacity 650ms ease, transform 650ms cubic-bezier(.2,.7,.3,1);
+  }
+  .flight-card.in{
+    opacity: 1;
+    transform: perspective(900px) rotateX(0deg) translateY(0);
+  }
+  .flight-grid > .flight-card:nth-child(2){ transition-delay: 70ms; }
+  .flight-grid > .flight-card:nth-child(3){ transition-delay: 140ms; }
+  .flight-grid > .flight-card:nth-child(4){ transition-delay: 210ms; }
+  .flight-card-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .flight-card h3{ font-size: 1.35rem; }
+  .price{
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .origin-line{
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .origin-line .bean-mini{ width: 15px; height: 9px; flex: none; }
+  .origin-line .bean-mini use{ fill: var(--accent); }
+  .notes{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .note-chip{
+    font-size: 12.5px;
+    padding: 4px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+  }
+
+  /* Space / contact sheet */
+  .sheet-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 760px){ .sheet-grid{ grid-template-columns: 1fr; } }
+  figure{ margin: 0; }
+  .frame{
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .frame canvas{
+    width: 100%;
+    height: 116%;
+    display: block;
+    position: relative;
+    top: -8%;
+  }
+  .frame::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 46px rgba(0,0,0,0.45);
+    pointer-events: none;
+  }
+  figcaption{
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Visit */
+  .visit{ border-top: 1px solid var(--line); }
+  .visit-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 72px);
+  }
+  @media (max-width: 760px){ .visit-grid{ grid-template-columns: 1fr; } }
+  table.hours{
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 14px;
+  }
+  table.hours td{
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+  }
+  table.hours td:last-child{
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+  }
+  .addr{
+    display: flex;
+    gap: 14px;
+  }
+  .pin{ flex: none; margin-top: 3px; color: var(--accent); }
+  .addr address{
+    font-style: normal;
+    line-height: 1.7;
+  }
+  .addr .note{ color: var(--muted); font-size: 14.5px; margin-top: 10px; }
+
+  /* Footer */
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 40px 0 48px;
+  }
+  .foot-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .foot-links{
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 13.5px;
+  }
+  .foot-links a{ text-decoration: none; color: var(--muted); }
+  .foot-links a:hover{ color: var(--ink); }
+  .foot-fine{
+    margin-top: 22px;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+
+  /* Reveal on scroll */
+  .reveal{
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+  .reveal.in{ opacity: 1; transform: none; }
+</style>
+
+<svg class="bean-defs" aria-hidden="true">
+  <defs>
+    <symbol id="bean" viewBox="0 0 100 60">
+      <path d="M50 2C23 2 3 14 3 30s20 28 47 28 47-12 47-28S77 2 50 2z"/>
+      <path d="M50 6C30 14 30 46 50 54" fill="none" stroke="rgba(0,0,0,0.32)" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <linearGradient id="beanGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop id="beanLight" offset="0"/>
+      <stop id="beanDark" offset="1"/>
+    </linearGradient>
+    <linearGradient id="cupBodyGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop id="cupLight" offset="0"/>
+      <stop id="cupDark" offset="1"/>
+    </linearGradient>
+    <radialGradient id="cremaGrad" cx="35%" cy="25%" r="80%">
+      <stop id="cremaLight" offset="0"/>
+      <stop id="cremaDark" offset="1"/>
+    </radialGradient>
+    <linearGradient id="hopperGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop id="hopperLight" offset="0"/>
+      <stop id="hopperDark" offset="1"/>
+    </linearGradient>
+    <linearGradient id="grinderBodyGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop id="grinderLight" offset="0"/>
+      <stop id="grinderDark" offset="1"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header class="site">
+  <nav class="nav wrap">
+    <span class="mark">Second <em>Crack</em></span>
+    <ul class="nav-links">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#flight">The Flight</a></li>
+      <li><a href="#space">Space</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <canvas id="steam"></canvas>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Small-batch roastery &amp; bar</span>
+        <h1>Roasted until the <i>second crack</i>,<br>then not a second more.</h1>
+        <p class="hero-sub">We buy green, roast on a 12-kilo drum out back, and pour what's freshest. Six single-origin lots on rotation, never more than three weeks off the roaster.</p>
+        <div class="cta-row">
+          <a class="btn btn-solid" href="#flight">See the flight</a>
+          <a class="btn btn-line" href="#visit">Visit us</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg class="bean-field" id="heroBeans" viewBox="0 0 600 600" aria-hidden="true"></svg>
+        <svg class="cup-illustration" viewBox="0 0 200 190" aria-hidden="true">
+          <ellipse class="saucer-shadow" cx="100" cy="180" rx="82" ry="9"/>
+          <path class="cup-handle" d="M158,68 C192,68 192,122 158,122"/>
+          <path class="cup-body" d="M35,55 L165,55 L142,167 Q140,177 128,177 L72,177 Q60,177 58,167 Z"/>
+          <path class="cup-rim" d="M35,55 Q100,68 165,55"/>
+          <ellipse class="crema" cx="100" cy="55" rx="65" ry="14"/>
+          <ellipse class="crema-shine" cx="76" cy="49" rx="20" ry="5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="grinder-scene">
+    <div class="wrap grinder-grid">
+      <div class="reveal">
+        <svg class="grinder-illustration" viewBox="0 0 200 262" aria-hidden="true">
+          <ellipse class="grinder-shadow" cx="100" cy="252" rx="66" ry="9"/>
+          <path class="hopper" d="M45,15 L155,15 L118,85 L82,85 Z"/>
+          <ellipse class="hopper-mouth" cx="100" cy="15" rx="55" ry="7"/>
+          <use href="#bean" class="bean-use" transform="translate(72,-2) rotate(-18) scale(0.42)"/>
+          <use href="#bean" class="bean-use" transform="translate(95,-10) rotate(30) scale(0.5)"/>
+          <use href="#bean" class="bean-use" transform="translate(118,0) rotate(-8) scale(0.4)"/>
+          <use href="#bean" class="bean-use" transform="translate(84,-16) rotate(60) scale(0.36)"/>
+          <rect class="grinder-body" x="55" y="85" width="90" height="128" rx="18"/>
+          <rect class="grinder-highlight" x="68" y="95" width="8" height="108" rx="4"/>
+          <g class="crank">
+            <circle class="crank-body" cx="150" cy="118" r="15"/>
+            <line class="crank-arm" x1="150" y1="118" x2="176" y2="118"/>
+            <circle class="crank-knob" cx="176" cy="118" r="7"/>
+          </g>
+          <path class="chute" d="M82,213 L118,213 L108,238 L92,238 Z"/>
+          <g class="grind-pile">
+            <use href="#bean" class="bean-use" transform="translate(80,244) rotate(10) scale(0.34)"/>
+            <use href="#bean" class="bean-use" transform="translate(100,250) rotate(-30) scale(0.4)"/>
+            <use href="#bean" class="bean-use" transform="translate(118,244) rotate(50) scale(0.32)"/>
+            <use href="#bean" class="bean-use" transform="translate(96,236) rotate(-70) scale(0.3)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Ground to order</span>
+        <h2 style="margin-top: 12px;">Every cup starts here.</h2>
+        <p class="measure" style="margin-top: 18px; color: var(--muted);">No pre-ground bags sitting on a shelf. Every order gets its own grind, dialed to the brew method, seconds before water touches it. It's slower than scooping from a hopper of stale grounds — that's the point.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy" id="philosophy">
+    <div class="wrap philosophy-body">
+      <div class="reveal">
+        <span class="eyebrow">Why we roast small</span>
+        <h2 style="margin-top: 12px;">A drum, not a factory.</h2>
+        <p class="measure" style="margin-top:18px; color: var(--muted);">Everything we sell was green a few weeks ago. We roast in small batches so we can taste every one before it goes on the bar — if a lot doesn't cup well, it doesn't ship, full stop.</p>
+        <p class="measure" style="margin-top:16px; color: var(--muted);">We pay above commodity price direct to the farms we buy from, and we print the numbers on every bag. No blends, no house filler — just the lot, named.</p>
+      </div>
+      <blockquote class="reveal">
+        “The best cup we ever pulled was also the plainest — one farm, one process, roasted for what it actually was.”
+        <cite>— Nadia Ostrowski, head roaster</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="flight" id="flight">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">On the bar this week</span>
+        <h2>The Flight</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="flight-grid">
+        <div class="flight-card">
+          <div class="flight-card-top">
+            <h3>Pour-over</h3>
+            <span class="price">$6.50</span>
+          </div>
+          <p class="origin-line"><svg class="bean-mini" viewBox="0 0 100 60"><use href="#bean"/></svg>Ethiopia · Yirgacheffe · Washed</p>
+          <div class="notes">
+            <span class="note-chip">Jasmine</span>
+            <span class="note-chip">Bergamot</span>
+            <span class="note-chip">Black tea</span>
+          </div>
+        </div>
+        <div class="flight-card">
+          <div class="flight-card-top">
+            <h3>Espresso</h3>
+            <span class="price">$4.00</span>
+          </div>
+          <p class="origin-line"><svg class="bean-mini" viewBox="0 0 100 60"><use href="#bean"/></svg>Colombia · Huila · Honey</p>
+          <div class="notes">
+            <span class="note-chip">Stone fruit</span>
+            <span class="note-chip">Brown sugar</span>
+            <span class="note-chip">Vanilla</span>
+          </div>
+        </div>
+        <div class="flight-card">
+          <div class="flight-card-top">
+            <h3>Cortado</h3>
+            <span class="price">$5.00</span>
+          </div>
+          <p class="origin-line"><svg class="bean-mini" viewBox="0 0 100 60"><use href="#bean"/></svg>Guatemala · Antigua · Natural</p>
+          <div class="notes">
+            <span class="note-chip">Cherry</span>
+            <span class="note-chip">Molasses</span>
+            <span class="note-chip">Clove</span>
+          </div>
+        </div>
+        <div class="flight-card">
+          <div class="flight-card-top">
+            <h3>Batch brew</h3>
+            <span class="price">$3.50</span>
+          </div>
+          <p class="origin-line"><svg class="bean-mini" viewBox="0 0 100 60"><use href="#bean"/></svg>Kenya · Nyeri · Washed</p>
+          <div class="notes">
+            <span class="note-chip">Blackcurrant</span>
+            <span class="note-chip">Tomato</span>
+            <span class="note-chip">Grapefruit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="space">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Contact sheet, this afternoon</span>
+        <h2>The space</h2>
+      </div>
+      <div class="sheet-grid reveal">
+        <figure>
+          <div class="frame"><canvas class="grain" data-hue="28"></canvas></div>
+          <figcaption><span>07:12</span><span>bar</span></figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><canvas class="grain" data-hue="20"></canvas></div>
+          <figcaption><span>counter</span><span>oak &amp; steel</span></figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><canvas class="grain" data-hue="35"></canvas></div>
+          <figcaption><span>16:40</span><span>roaster, back room</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap visit-grid">
+      <div class="reveal">
+        <span class="eyebrow">Hours</span>
+        <h2 style="margin-top: 12px; margin-bottom: 22px;">When we're pulling shots</h2>
+        <table class="hours">
+          <tr><td>Monday — Friday</td><td>7:30 – 18:00</td></tr>
+          <tr><td>Saturday</td><td>8:00 – 17:00</td></tr>
+          <tr><td>Sunday</td><td>8:00 – 15:00</td></tr>
+        </table>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Find us</span>
+        <div class="addr" style="margin-top: 12px;">
+          <svg class="pin" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 22s7-7.58 7-12.5S16.4 2 12 2 5 4.86 5 9.5 12 22 12 22Z" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="9.5" r="2.6" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+          <address>
+            14 Ashland Row<br>
+            Riverside District<br>
+            Open to walk-ins — no reservations
+            <div class="note">Espresso machine goes quiet at 17:45 for cleaning, filter bar stays open till close.</div>
+          </address>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <span class="mark">Second <em>Crack</em></span>
+      <ul class="foot-links">
+        <li><a href="#flight">Menu</a></li>
+        <li><a href="#visit">Hours &amp; address</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+    <p class="foot-fine">Six lots on rotation · roasted weekly · Batch 214 currently pouring</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  // Ambient steam rising from the hero cup
+  var steam = document.getElementById('steam');
+  if (steam) {
+    var ctx = steam.getContext('2d');
+    function fit(){
+      var hero = steam.parentElement;
+      steam.width = hero.clientWidth * devicePixelRatio;
+      steam.height = hero.clientHeight * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    }
+    fit();
+    window.addEventListener('resize', fit);
+
+    if (reduced) {
+      var w = steam.parentElement.clientWidth, h = steam.parentElement.clientHeight;
+      var grad = ctx.createRadialGradient(w*0.78, h*0.42, 10, w*0.78, h*0.42, w*0.3);
+      grad.addColorStop(0, 'rgba(210,162,76,0.16)');
+      grad.addColorStop(1, 'rgba(210,162,76,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,w,h);
+    } else {
+      var particles = [];
+      function spawn(){
+        var w = steam.parentElement.clientWidth, h = steam.parentElement.clientHeight;
+        particles.push({
+          x: w*0.78 + (Math.random()-0.5)*36,
+          y: h*0.5,
+          r: 9 + Math.random()*13,
+          vy: -0.25 - Math.random()*0.35,
+          drift: (Math.random()-0.5)*0.4,
+          life: 0,
+          maxLife: 240 + Math.random()*110
+        });
+      }
+      var frame = 0;
+      function tick(){
+        frame++;
+        if (frame % 18 === 0 && particles.length < 12) spawn();
+        var w = steam.parentElement.clientWidth, h = steam.parentElement.clientHeight;
+        ctx.clearRect(0,0,w,h);
+        particles.forEach(function(p){
+          p.y += p.vy;
+          p.x += p.drift;
+          p.life++;
+          var t = p.life / p.maxLife;
+          var alpha = Math.sin(Math.PI * t) * 0.16;
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(230,230,225,' + Math.max(alpha,0) + ')';
+          ctx.arc(p.x, p.y, p.r * (0.6 + t*0.8), 0, Math.PI*2);
+          ctx.fill();
+        });
+        particles = particles.filter(function(p){ return p.life < p.maxLife; });
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+  }
+
+  // Scatter a generous field of beans behind the hero cup
+  var heroBeans = document.getElementById('heroBeans');
+  if (heroBeans) {
+    var vb = { x: 0, y: 0, w: 600, h: 600 };
+    var ring = [
+      { rMin: 130, rMax: 200, sMin: 0.55, sMax: 0.9, op: 1 },
+      { rMin: 200, rMax: 270, sMin: 0.35, sMax: 0.6, op: 0.75 },
+      { rMin: 270, rMax: 300, sMin: 0.2, sMax: 0.4, op: 0.45 }
+    ];
+    var cx = vb.w * 0.5, cy = vb.h * 0.56;
+    ring.forEach(function(band, bi){
+      var count = bi === 0 ? 10 : (bi === 1 ? 14 : 12);
+      for (var i = 0; i < count; i++){
+        var a = Math.random() * Math.PI * 2;
+        var r = band.rMin + Math.random() * (band.rMax - band.rMin);
+        var x = cx + Math.cos(a) * r;
+        var y = cy + Math.sin(a) * r * 0.7;
+        var s = band.sMin + Math.random() * (band.sMax - band.sMin);
+        var rot = Math.random() * 360;
+        var use = document.createElementNS(NS, 'use');
+        use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#bean');
+        use.setAttribute('href', '#bean');
+        use.setAttribute('class', 'bean-use');
+        use.setAttribute('transform', 'translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ') rotate(' + rot.toFixed(1) + ') scale(' + s.toFixed(2) + ')');
+        use.style.opacity = band.op;
+        heroBeans.appendChild(use);
+      }
+    });
+  }
+
+  // Grain texture panels ("contact sheet")
+  document.querySelectorAll('canvas.grain').forEach(function(c){
+    var frame = c.parentElement;
+    function draw(){
+      var w = frame.clientWidth, h = frame.clientHeight;
+      c.width = w; c.height = h;
+      var g = c.getContext('2d');
+      var hue = c.dataset.hue || 28;
+      var grad = g.createLinearGradient(0,0,w,h);
+      grad.addColorStop(0, 'hsl(' + hue + ', 32%, 22%)');
+      grad.addColorStop(1, 'hsl(' + hue + ', 26%, 10%)');
+      g.fillStyle = grad;
+      g.fillRect(0,0,w,h);
+      var imgData = g.getImageData(0,0,w,h);
+      var d = imgData.data;
+      for (var i=0; i<d.length; i+=4){
+        var n = (Math.random()-0.5) * 22;
+        d[i] += n; d[i+1] += n; d[i+2] += n;
+      }
+      g.putImageData(imgData, 0, 0);
+    }
+    draw();
+    window.addEventListener('resize', draw);
+  });
+
+  // Scroll reveal (fades + the tilted flight cards)
+  var els = document.querySelectorAll('.reveal, .flight-card');
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // Depth parallax on the contact-sheet photos
+  var frames = document.querySelectorAll('.frame canvas');
+  if (frames.length && !reduced) {
+    var pTicking = false;
+    function updateParallax(){
+      pTicking = false;
+      var vh = window.innerHeight;
+      frames.forEach(function(c, i){
+        var rect = c.parentElement.getBoundingClientRect();
+        var center = rect.top + rect.height / 2 - vh / 2;
+        var speed = 0.06 + (i % 3) * 0.03;
+        c.style.transform = 'translateY(' + (center * speed).toFixed(1) + 'px)';
+      });
+    }
+    window.addEventListener('scroll', function(){
+      if (!pTicking){ pTicking = true; requestAnimationFrame(updateParallax); }
+    }, { passive: true });
+    window.addEventListener('resize', updateParallax);
+    updateParallax();
+  }
+})();
+</script>
