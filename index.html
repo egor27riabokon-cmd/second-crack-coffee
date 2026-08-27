@@ -6,19 +6,14 @@
 <title>Second Crack</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #F0EEE9;
+    --bg: #F3F2EF;
     --surface: #FFFFFF;
-    --ink: #1B1912;
-    --muted: #706A5C;
-    --line: #DEDACE;
-    --accent-cup: #C1592E;
-    --accent-dripper: #7C8A5E;
-    --accent-bag: #D8CBAE;
-    --accent-grinder: #2B2622;
-    --accent-kettle: #C89B3C;
+    --ink: #17150F;
+    --muted: #6E695D;
+    --line: #E2DFD5;
   }
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
@@ -28,190 +23,212 @@
   body{
     margin: 0; background: var(--bg); color: var(--ink);
     font-family: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased;
+    font-size: 15.5px; line-height: 1.55; -webkit-font-smoothing: antialiased;
   }
   a{ color: inherit; }
   img, svg, canvas{ display: block; max-width: 100%; }
-  .wrap{ max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 48px); }
-
-  h1, h2{ font-family: "Fraunces", Georgia, serif; font-weight: 500; margin: 0; text-wrap: balance; }
+  .wrap{ max-width: 1400px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
   p{ margin: 0; }
-  .eyebrow{ font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
   :focus-visible{ outline: 2px solid var(--ink); outline-offset: 2px; }
 
+  .mono{ font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  .eyebrow{ font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
   /* Marquee */
-  .marquee{
-    background: var(--ink); color: var(--bg);
-    overflow: hidden; white-space: nowrap;
-    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: 0.06em;
-    padding: 9px 0;
-  }
-  .marquee-track{ display: inline-flex; animation: scroll-left 26s linear infinite; }
-  .marquee-track span{ padding: 0 22px; text-transform: uppercase; }
+  .marquee{ background: var(--ink); color: var(--bg); overflow: hidden; white-space: nowrap; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.05em; padding: 8px 0; }
+  .marquee-track{ display: inline-flex; animation: scroll-left 28s linear infinite; }
+  .marquee-track span{ padding: 0 20px; text-transform: uppercase; }
   @keyframes scroll-left{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
 
   /* Header */
-  header.site{ position: sticky; top: 0; z-index: 60; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-  .nav{ display: flex; align-items: center; justify-content: space-between; padding: 16px clamp(18px, 4vw, 48px); }
+  header.site{ padding: 18px clamp(20px, 4vw, 56px); }
   .burger{ background: none; border: none; cursor: pointer; padding: 6px; display: flex; flex-direction: column; gap: 5px; }
   .burger span{ display: block; width: 22px; height: 2px; background: var(--ink); transition: transform 200ms ease, opacity 200ms ease; }
   .burger.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
   .burger.open span:nth-child(2){ opacity: 0; }
   .burger.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
-  .mark{ font-family: "Fraunces", serif; font-size: 19px; letter-spacing: 0.02em; }
-  .nav-right{ font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 
-  .menu-panel{
-    position: fixed; inset: 0; top: 0; z-index: 55;
-    background: var(--bg);
-    display: flex; flex-direction: column; justify-content: center; gap: 18px;
-    padding: 0 clamp(24px, 8vw, 80px);
-    transform: translateY(-100%); transition: transform 380ms cubic-bezier(.2,.7,.3,1);
-  }
+  .menu-panel{ position: fixed; inset: 0; z-index: 90; background: var(--bg); display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 0 clamp(24px, 8vw, 80px); transform: translateY(-100%); transition: transform 380ms cubic-bezier(.2,.7,.3,1); }
   .menu-panel.open{ transform: translateY(0); }
-  .menu-panel a{ font-family: "Fraunces", serif; font-size: clamp(2rem, 6vw, 3.4rem); text-decoration: none; color: var(--ink); }
-  .menu-panel .close{ position: absolute; top: 20px; right: clamp(18px,4vw,48px); background: none; border: none; font-size: 28px; cursor: pointer; color: var(--ink); }
+  .menu-panel a{ font-family: "Fraunces", serif; font-size: clamp(2rem, 6vw, 3.2rem); text-decoration: none; color: var(--ink); }
+  .menu-panel .close{ position: absolute; top: 18px; right: clamp(18px,4vw,48px); background: none; border: none; font-size: 30px; cursor: pointer; color: var(--ink); line-height: 1; }
+  .menu-foot{ position: absolute; bottom: 40px; left: clamp(24px,8vw,80px); font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); }
 
   /* Hero */
-  .hero{ padding: clamp(28px, 5vw, 56px) 0 0; }
-  .hero-grid{ display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
-  @media (max-width: 860px){ .hero-grid{ grid-template-columns: 1fr; } }
-  .stage{
-    position: relative; aspect-ratio: 4/3.2; border-radius: 4px; overflow: hidden;
-    background: radial-gradient(ellipse at 50% 38%, #FAFAF7 0%, var(--bg) 72%);
-  }
-  .stage canvas{ width: 100%; height: 100%; cursor: grab; touch-action: none; }
-  .stage canvas:active{ cursor: grabbing; }
-  .stage-hint{
-    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--muted); pointer-events: none;
-  }
-  .specs{ display: flex; flex-direction: column; gap: 22px; }
-  .hero h1{ font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.1; margin-top: 10px; }
-  .spec-rows{ display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; font-size: 13.5px; }
-  .spec-rows dt{ font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  .spec-rows dd{ margin: 0; }
-  .btn{
-    display: inline-flex; align-items: center; gap: 8px; width: fit-content;
-    padding: 13px 24px; background: var(--ink); color: var(--bg);
-    font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-    text-decoration: none; border: none; cursor: pointer; transition: opacity 180ms ease;
-  }
-  .btn:hover{ opacity: 0.82; }
+  .hero{ padding: clamp(20px, 4vw, 40px) 0 0; }
+  .hero-row{ display: grid; grid-template-columns: 1fr 0.42fr; gap: clamp(20px, 3vw, 40px); }
+  @media (max-width: 760px){ .hero-row{ grid-template-columns: 1fr; } }
+  .stage{ position: relative; aspect-ratio: 16/11; background: linear-gradient(180deg, #FAFAF8, #EFEDE6); overflow: hidden; }
+  .stage canvas{ width: 100%; height: 100%; }
+  .hero-specs{ padding-top: 6px; }
+  .hero-specs dl{ display: grid; grid-template-columns: auto auto; gap: 5px 16px; font-size: 12px; }
+  .hero-specs dt{ font-family: "IBM Plex Mono", monospace; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .hero-specs dd{ margin: 0; text-align: right; }
+  .hero-title{ margin-top: clamp(28px, 6vw, 56px); font-family: "Fraunces", serif; font-weight: 500; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.12; max-width: 16ch; }
 
-  /* Collection rail */
-  .collection{ padding: clamp(56px, 8vw, 96px) 0; }
-  .section-head{ display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 28px; gap: 16px; flex-wrap: wrap; }
-  .section-head h2{ font-size: clamp(1.5rem, 2.6vw, 2rem); }
-  .rail{
-    display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
-    padding-bottom: 12px; margin: 0 clamp(-18px,-4vw,-48px); padding-left: clamp(18px,4vw,48px); padding-right: clamp(18px,4vw,48px);
-    -webkit-overflow-scrolling: touch;
-  }
-  .rail::-webkit-scrollbar{ height: 6px; }
-  .rail::-webkit-scrollbar-thumb{ background: var(--line); }
-  .product-card{
-    flex: 0 0 auto; width: min(280px, 62vw); scroll-snap-align: start;
-    background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
-    overflow: hidden;
-  }
-  .product-thumb{ aspect-ratio: 1/1; background: radial-gradient(ellipse at 50% 40%, #FAFAF7, #F0EEE9); }
+  .breather{ height: clamp(60px, 14vw, 220px); }
+
+  /* Category sections */
+  .category{ padding: 8px 0 clamp(48px, 7vw, 84px); border-top: 1px solid var(--line); }
+  .cat-head{ display: flex; align-items: baseline; justify-content: space-between; padding: clamp(28px, 5vw, 44px) 0 clamp(20px, 3vw, 32px); gap: 16px; }
+  .cat-head h2{ margin: 0; font-family: "Public Sans", sans-serif; font-weight: 800; font-size: clamp(1.6rem, 3.4vw, 2.3rem); letter-spacing: -0.01em; text-transform: uppercase; }
+  .cat-all{ font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; text-decoration: none; white-space: nowrap; }
+  .cat-all:hover{ border-color: var(--ink); }
+  .product-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 24px); }
+  @media (max-width: 900px){ .product-grid{ grid-template-columns: repeat(2, 1fr); } }
+  .product-card{ display: block; text-decoration: none; color: inherit; }
+  .product-thumb{ aspect-ratio: 1/1; background: linear-gradient(180deg, #FAFAF8, #EFEDE6); overflow: hidden; }
   .product-thumb img{ width: 100%; height: 100%; object-fit: contain; }
-  .product-info{ padding: 16px 18px 20px; }
-  .product-name{ font-family: "Fraunces", serif; font-size: 1.15rem; }
-  .product-meta{ margin-top: 4px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
-  .product-price{ margin-top: 10px; font-family: "IBM Plex Mono", monospace; font-size: 14px; }
+  .product-meta{ margin-top: 12px; display: grid; grid-template-columns: auto auto; gap: 3px 10px; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.03em; }
+  .product-meta dt{ color: var(--muted); }
+  .product-meta dd{ margin: 0; text-align: right; }
+  .product-meta .full{ grid-column: 1 / -1; text-align: left; font-family: "Public Sans", sans-serif; font-size: 14px; text-transform: none; letter-spacing: 0; margin-top: 2px; color: var(--ink); }
 
-  /* Blurb */
-  .blurb{ border-top: 1px solid var(--line); padding: clamp(56px, 8vw, 96px) 0; }
-  .blurb-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 60px); }
-  @media (max-width: 760px){ .blurb-grid{ grid-template-columns: 1fr; } }
-  .blurb h2{ font-size: clamp(1.6rem, 3vw, 2.2rem); }
-  .blurb p{ color: var(--muted); margin-top: 14px; max-width: 52ch; }
+  /* About */
+  .about{ border-top: 1px solid var(--line); padding: clamp(56px, 8vw, 100px) 0; }
+  .about-top{ display: grid; grid-template-columns: 0.5fr 1fr; gap: clamp(20px, 4vw, 48px); }
+  @media (max-width: 760px){ .about-top{ grid-template-columns: 1fr; } }
+  .about-top h2{ font-family: "Public Sans", sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.6vw, 2.6rem); letter-spacing: -0.01em; margin: 0; }
+  .about-quote{ font-family: "Fraunces", serif; font-style: italic; font-size: clamp(1.3rem, 2.4vw, 1.8rem); line-height: 1.4; max-width: 34ch; }
+  .about-quote cite{ display: block; margin-top: 16px; font-family: "IBM Plex Mono", monospace; font-style: normal; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+  .about-cols{ margin-top: clamp(40px, 6vw, 72px); display: grid; grid-template-columns: 0.5fr 0.5fr 1fr; gap: clamp(20px, 4vw, 48px); }
+  @media (max-width: 760px){ .about-cols{ grid-template-columns: 1fr; } }
+  .about-cols h3{ font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  .about-cols ul{ list-style: none; margin: 0; padding: 0; font-size: 14.5px; }
+  .about-cols li{ padding: 6px 0; border-top: 1px solid var(--line); }
+  .about-cols li:first-child{ border-top: none; }
+  .about-cols p{ color: var(--muted); font-size: 14.5px; max-width: 48ch; }
 
-  footer{ border-top: 1px solid var(--line); padding: 32px 0 40px; }
-  .foot-row{ display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
-  .foot-links{ display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
-  .foot-links a{ text-decoration: none; }
+  /* Footer index */
+  .index-foot{ border-top: 1px solid var(--line); padding: clamp(56px, 10vw, 120px) 0; text-align: center; }
+  .index-foot p{ font-family: "Fraunces", serif; font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.5; }
+  .index-foot a{ text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 200ms ease; }
+  .index-foot a:hover{ border-color: var(--ink); }
+
+  footer.fine{ border-top: 1px solid var(--line); padding: 22px 0 32px; }
+  .foot-row{ display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
 </style>
 </head>
 <body>
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>SIX ORIGINS ON ROTATION</span><span>·</span><span>ROASTED IN SMALL BATCHES, WEEKLY</span><span>·</span><span>FREE LOCAL DELIVERY OVER $30</span><span>·</span>
-    <span>SIX ORIGINS ON ROTATION</span><span>·</span><span>ROASTED IN SMALL BATCHES, WEEKLY</span><span>·</span><span>FREE LOCAL DELIVERY OVER $30</span><span>·</span>
+    <span>SIX ORIGINS ON ROTATION</span><span>·</span><span>ROASTED WEEKLY IN SMALL BATCHES</span><span>·</span><span>FREE LOCAL DELIVERY OVER $30</span><span>·</span>
+    <span>SIX ORIGINS ON ROTATION</span><span>·</span><span>ROASTED WEEKLY IN SMALL BATCHES</span><span>·</span><span>FREE LOCAL DELIVERY OVER $30</span><span>·</span>
   </div>
 </div>
 
 <header class="site">
-  <nav class="nav wrap">
-    <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <span class="mark">Second Crack</span>
-    <span class="nav-right">Batch 214</span>
-  </nav>
+  <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <div class="menu-panel" id="menuPanel">
   <button class="close" id="menuClose" aria-label="Close menu">&times;</button>
-  <a href="#collection">The Collection</a>
-  <a href="#about">Philosophy</a>
-  <a href="#visit">Visit</a>
+  <a href="#cups">Cups</a>
+  <a href="#gear">Brew Gear</a>
+  <a href="#bags">Bags</a>
+  <a href="#about">About</a>
+  <div class="menu-foot">Second Crack · 14 Ashland Row</div>
 </div>
 
 <main>
   <section class="hero">
-    <div class="wrap hero-grid">
+    <div class="wrap hero-row">
       <div class="stage">
         <canvas id="heroCanvas"></canvas>
-        <div class="stage-hint">Drag to rotate</div>
       </div>
-      <div class="specs">
-        <span class="eyebrow">Featured this week</span>
-        <h1>The Espresso Cup, in Batch 214's roast.</h1>
-        <dl class="spec-rows">
-          <dt>Category</dt><dd>Tableware</dd>
+      <div class="hero-specs">
+        <dl>
+          <dt>Category</dt><dd>Cups</dd>
           <dt>Collection</dt><dd>Studio Line</dd>
-          <dt>Origin</dt><dd>Yirgacheffe, Ethiopia</dd>
+          <dt>Colour</dt><dd>Batch 214</dd>
         </dl>
-        <a class="btn" href="#collection">See the collection</a>
       </div>
+    </div>
+    <div class="wrap">
+      <h1 class="hero-title">Faceted<br>Espresso Set</h1>
     </div>
   </section>
 
-  <section class="collection" id="collection">
+  <div class="breather"></div>
+
+  <section class="category" id="cups">
     <div class="wrap">
-      <div class="section-head">
+      <div class="cat-head">
+        <h2>Cups</h2>
+        <a class="cat-all" href="#cups">All (4)</a>
+      </div>
+      <div class="product-grid" id="gridCups"></div>
+    </div>
+  </section>
+
+  <section class="category" id="gear">
+    <div class="wrap">
+      <div class="cat-head">
+        <h2>Brew Gear</h2>
+        <a class="cat-all" href="#gear">All (4)</a>
+      </div>
+      <div class="product-grid" id="gridGear"></div>
+    </div>
+  </section>
+
+  <section class="category" id="bags">
+    <div class="wrap">
+      <div class="cat-head">
+        <h2>Bags</h2>
+        <a class="cat-all" href="#bags">All (4)</a>
+      </div>
+      <div class="product-grid" id="gridBags"></div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="about-top">
+        <h2>About</h2>
+        <blockquote class="about-quote">
+          "We roast in small enough batches that we can taste every one before it goes on the bar. If a lot doesn't cup well, it doesn't ship."
+          <cite>— Nadia Ostrowski, Head Roaster</cite>
+        </blockquote>
+      </div>
+      <div class="about-cols">
         <div>
-          <span class="eyebrow">Five objects, one bar</span>
-          <h2 style="margin-top: 8px;">The Collection</h2>
+          <h3>Featured</h3>
+          <ul>
+            <li>Riverside District</li>
+            <li>Ashland Row</li>
+            <li>Third &amp; Kestrel</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Stockists</h3>
+          <ul>
+            <li>Marrow Provisions</li>
+            <li>Fen &amp; Co.</li>
+            <li>The Long Counter</li>
+          </ul>
+        </div>
+        <div>
+          <p>Second Crack roasts six single-origin lots at a time on a 12-kilo drum, direct-traded and printed with the numbers on every bag. No blends, no house filler — just the lot, named.</p>
         </div>
       </div>
     </div>
-    <div class="rail" id="rail"></div>
   </section>
 
-  <section class="blurb" id="about">
-    <div class="wrap blurb-grid">
-      <div>
-        <span class="eyebrow">Why we roast small</span>
-        <h2 style="margin-top: 10px;">A drum, not a factory.</h2>
-      </div>
-      <p>Everything on the bar was green a few weeks ago. Six single-origin lots, roasted in small batches on a 12-kilo drum, never blended. If a lot doesn't cup well, it doesn't ship.</p>
-    </div>
+  <section class="index-foot">
+    <p>
+      <a href="#cups">All</a> / <a href="#cups">Cups</a><br>
+      <a href="#gear">Brew Gear</a> / <a href="#bags">Bags</a>
+    </p>
   </section>
 </main>
 
-<footer id="visit">
+<footer class="fine">
   <div class="wrap foot-row">
     <span>14 Ashland Row · Open daily 7:30–18:00</span>
-    <ul class="foot-links">
-      <li><a href="#collection">Shop</a></li>
-      <li><a href="#">Instagram</a></li>
-    </ul>
+    <span>Batch 214, currently pouring</span>
   </div>
 </footer>
 
@@ -220,7 +237,6 @@
 (function(){
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---- Menu toggle ----
   var burger = document.getElementById('burgerBtn');
   var panel = document.getElementById('menuPanel');
   var closeBtn = document.getElementById('menuClose');
@@ -235,137 +251,193 @@
 
   if (typeof THREE === 'undefined') return;
 
-  var PRODUCTS = [
-    { name: 'Espresso Cup',   meta: 'Tableware · faceted',  price: '$18', color: 0xC1592E, build: buildCup },
-    { name: 'Filter Dripper', meta: 'Brew gear · ceramic',  price: '$26', color: 0x7C8A5E, build: buildDripper },
-    { name: 'Batch 214 Bag',  meta: '250g · Yirgacheffe',   price: '$16', color: 0xD8CBAE, build: buildBag },
-    { name: 'Hand Grinder',   meta: 'Brew gear · steel',    price: '$64', color: 0x2B2622, build: buildGrinder },
-    { name: 'Pour Kettle',    meta: 'Brew gear · gooseneck',price: '$48', color: 0xC89B3C, build: buildKettle }
-  ];
-
-  function buildCup(group, color){
-    var mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.4, metalness: 0.05 });
-    var m = new THREE.Mesh(new THREE.CylinderGeometry(1, 0.8, 1.6, 8, 1), mat);
-    group.add(m);
-    return 1.7;
-  }
-  function buildDripper(group, color){
-    var mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.5, metalness: 0.05 });
-    var m = new THREE.Mesh(new THREE.CylinderGeometry(1, 0.18, 1.5, 8, 1), mat);
-    group.add(m);
-    return 1.6;
-  }
-  function buildBag(group, color){
-    var mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.75, metalness: 0.0 });
-    var m = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.9, 0.65), mat);
-    group.add(m);
-    return 2.0;
-  }
-  function buildGrinder(group, color){
-    var mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.3, metalness: 0.4 });
-    var body = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 1.3, 8), mat);
-    body.position.y = -0.25;
-    var hopper = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.5, 0.8, 8), mat);
-    hopper.position.y = 0.55;
-    group.add(body); group.add(hopper);
-    return 1.9;
-  }
-  function buildKettle(group, color){
-    var mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.25, metalness: 0.5 });
-    var m = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.9, 1.35, 8), mat);
-    group.add(m);
-    return 1.6;
-  }
-
+  // ---- shared soft studio lighting + shadow ----
   function makeScene(){
     var scene = new THREE.Scene();
-    scene.background = null;
-    var key = new THREE.DirectionalLight(0xffffff, 2.4);
-    key.position.set(3.5, 5, 4);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xd9d4c6, 1.0));
+    var key = new THREE.DirectionalLight(0xffffff, 1.5);
+    key.position.set(4, 6, 5);
     scene.add(key);
-    var fill = new THREE.DirectionalLight(0xffffff, 0.7);
-    fill.position.set(-4, 2, -2);
+    var fill = new THREE.DirectionalLight(0xffffff, 0.55);
+    fill.position.set(-5, 2.5, 3);
     scene.add(fill);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    var rim = new THREE.DirectionalLight(0xffffff, 0.5);
+    rim.position.set(-2, 3, -5);
+    scene.add(rim);
     return scene;
   }
 
-  // ---- Hero interactive canvas ----
+  var shadowTex = (function(){
+    var c = document.createElement('canvas'); c.width = c.height = 256;
+    var ctx = c.getContext('2d');
+    var g = ctx.createRadialGradient(128,128,8,128,128,126);
+    g.addColorStop(0, 'rgba(20,16,8,0.32)');
+    g.addColorStop(1, 'rgba(20,16,8,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,256,256);
+    return new THREE.CanvasTexture(c);
+  })();
+  function addShadow(scene, x, y, z, scale){
+    var mat = new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false });
+    var plane = new THREE.Mesh(new THREE.PlaneGeometry(scale, scale), mat);
+    plane.rotation.x = -Math.PI/2;
+    plane.position.set(x, y, z);
+    scene.add(plane);
+  }
+
+  function mat(color, rough, metal){
+    return new THREE.MeshStandardMaterial({ color: color, roughness: rough == null ? 0.45 : rough, metalness: metal == null ? 0.06 : metal });
+  }
+
+  function buildCup(scene, color, x, z, s){
+    s = s || 1;
+    var g = new THREE.Group();
+    g.position.set(x, 0, z);
+    g.scale.setScalar(s);
+    var cm = mat(color);
+    var m = new THREE.Mesh(new THREE.CylinderGeometry(1, 0.85, 1.6, 10, 1), cm);
+    m.position.y = 0.8;
+    g.add(m);
+    var handle = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.1, 8, 16, Math.PI * 1.35), cm);
+    handle.rotation.y = Math.PI / 2;
+    handle.rotation.z = -Math.PI * 0.18;
+    handle.position.set(0.98, 0.8, 0);
+    g.add(handle);
+    scene.add(g);
+    addShadow(scene, x, 0.01, z, 2.6 * s);
+    return g;
+  }
+  function buildDripper(scene, color, x, z, s){
+    s = s || 1;
+    var g = new THREE.Group();
+    g.position.set(x, 0, z); g.scale.setScalar(s);
+    var m = new THREE.Mesh(new THREE.CylinderGeometry(1, 0.18, 1.5, 8, 1), mat(color, 0.5));
+    m.position.y = 0.75;
+    g.add(m); scene.add(g);
+    addShadow(scene, x, 0.01, z, 2.4 * s);
+    return g;
+  }
+  function buildBag(scene, color, x, z, s){
+    s = s || 1;
+    var g = new THREE.Group();
+    g.position.set(x, 0, z); g.scale.setScalar(s);
+    var m = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.9, 0.65), mat(color, 0.8, 0));
+    m.position.y = 0.95;
+    g.add(m); scene.add(g);
+    addShadow(scene, x, 0.01, z, 2.8 * s);
+    return g;
+  }
+  function buildGrinder(scene, color, x, z, s){
+    s = s || 1;
+    var g = new THREE.Group();
+    g.position.set(x, 0, z); g.scale.setScalar(s);
+    var m1 = mat(color, 0.3, 0.35);
+    var body = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 1.3, 8), m1);
+    body.position.y = 0.65 + 0.3;
+    var hopper = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.5, 0.8, 8), m1);
+    hopper.position.y = 1.5 + 0.3;
+    g.add(body); g.add(hopper); scene.add(g);
+    addShadow(scene, x, 0.01, z, 2.8 * s);
+    return g;
+  }
+  function buildKettle(scene, color, x, z, s){
+    s = s || 1;
+    var g = new THREE.Group();
+    g.position.set(x, 0, z); g.scale.setScalar(s);
+    var m = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.9, 1.35, 8), mat(color, 0.25, 0.5));
+    m.position.y = 0.675;
+    g.add(m); scene.add(g);
+    addShadow(scene, x, 0.01, z, 2.6 * s);
+    return g;
+  }
+  function buildRiser(scene, x, z, w, h, d){
+    var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(0xF4F2EC, 0.85, 0));
+    m.position.set(x, h/2, z);
+    scene.add(m);
+    addShadow(scene, x, 0.01, z, Math.max(w,d) * 1.9);
+    return m;
+  }
+
+  var COLORS = { terracotta: 0xC1592E, sage: 0x7C8A5E, cream: 0xD8CBAE, charcoal: 0x2B2622, gold: 0xC89B3C, forest: 0x3E4B33 };
+
+  function renderStatic(canvas, build, opts){
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    var w = canvas.clientWidth || opts.w, h = canvas.clientHeight || opts.h;
+    renderer.setSize(w, h, false);
+    var camera = new THREE.PerspectiveCamera(28, w/h, 0.1, 100);
+    camera.position.set(opts.camX || 3.2, opts.camY || 2.2, opts.camZ || 6.2);
+    camera.lookAt(0, opts.lookY || 0.6, 0);
+    var scene = build();
+    scene.rotation.y = opts.rotY || 0;
+    renderer.render(scene, camera);
+    return renderer;
+  }
+
+  // ---- Hero: composed still life ----
   var heroCanvas = document.getElementById('heroCanvas');
-  var heroRenderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
-  heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  var heroScene = makeScene();
-  var heroGroup = new THREE.Group();
-  heroScene.add(heroGroup);
-  buildCup(heroGroup, PRODUCTS[0].color);
-
-  var heroCamera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
-  function fitHero(){
+  function fitAndRenderHero(){
     var stage = heroCanvas.parentElement;
-    var w = stage.clientWidth, h = stage.clientHeight;
-    heroRenderer.setSize(w, h, false);
-    heroCamera.aspect = w / h;
-    heroCamera.position.set(0, 0.5, 5.4);
-    heroCamera.lookAt(0, 0, 0);
-    heroCamera.updateProjectionMatrix();
+    heroCanvas.width = stage.clientWidth; heroCanvas.height = stage.clientHeight;
+    renderStatic(heroCanvas, function(){
+      var scene = makeScene();
+      buildRiser(scene, 0.9, -0.3, 2.0, 0.9, 2.0);
+      var cup = buildCup(scene, COLORS.terracotta, 0.9, -0.3, 1.15);
+      cup.position.y = 0.9;
+      buildDripper(scene, COLORS.sage, -1.3, 0.6, 0.85);
+      return scene;
+    }, { w: heroCanvas.width, h: heroCanvas.height, camX: 3.4, camY: 2.0, camZ: 7.4, lookY: 0.8, rotY: -0.15 });
   }
-  fitHero();
-  window.addEventListener('resize', fitHero);
+  fitAndRenderHero();
+  window.addEventListener('resize', fitAndRenderHero);
 
-  var dragging = false, lastX = 0, lastY = 0, velX = 0.004;
-  heroCanvas.addEventListener('pointerdown', function(e){ dragging = true; lastX = e.clientX; lastY = e.clientY; heroCanvas.setPointerCapture(e.pointerId); });
-  heroCanvas.addEventListener('pointermove', function(e){
-    if (!dragging) return;
-    var dx = e.clientX - lastX, dy = e.clientY - lastY;
-    heroGroup.rotation.y += dx * 0.01;
-    heroGroup.rotation.x = Math.max(-0.5, Math.min(0.5, heroGroup.rotation.x + dy * 0.01));
-    velX = dx * 0.0006;
-    lastX = e.clientX; lastY = e.clientY;
-  });
-  window.addEventListener('pointerup', function(){ dragging = false; });
+  // ---- Category thumbnails ----
+  var CATALOG = {
+    gridCups: [
+      { name: 'Espresso Cup', collection: 'Studio Line', colour: 'Terracotta', price: '$18', build: function(s){ return buildCup(s, COLORS.terracotta, 0, 0, 1); } },
+      { name: 'Cortado Cup', collection: 'Studio Line', colour: 'Sage', price: '$18', build: function(s){ return buildCup(s, COLORS.sage, 0, 0, 0.95); } },
+      { name: 'Latte Cup', collection: 'Studio Line', colour: 'Cream', price: '$22', build: function(s){ return buildCup(s, COLORS.cream, 0, 0, 1.1); } },
+      { name: 'Cupping Bowl', collection: 'Studio Line', colour: 'Charcoal', price: '$16', build: function(s){ return buildCup(s, COLORS.charcoal, 0, 0, 0.85); } }
+    ],
+    gridGear: [
+      { name: 'Filter Dripper', collection: 'Brew Gear', colour: 'Sage', price: '$26', build: function(s){ return buildDripper(s, COLORS.sage, 0, 0, 1); } },
+      { name: 'Hand Grinder', collection: 'Brew Gear', colour: 'Charcoal', price: '$64', build: function(s){ return buildGrinder(s, COLORS.charcoal, 0, 0, 0.85); } },
+      { name: 'Pour Kettle', collection: 'Brew Gear', colour: 'Gold', price: '$48', build: function(s){ return buildKettle(s, COLORS.gold, 0, 0, 1); } },
+      { name: 'Cupping Set', collection: 'Brew Gear', colour: 'Terracotta', price: '$34', build: function(s){ return buildCup(s, COLORS.terracotta, 0, 0, 0.7); } }
+    ],
+    gridBags: [
+      { name: 'Batch 214', collection: 'Yirgacheffe', colour: 'Cream', price: '$16', build: function(s){ return buildBag(s, COLORS.cream, 0, 0, 1); } },
+      { name: 'Batch 209', collection: 'Huila', colour: 'Terracotta', price: '$16', build: function(s){ return buildBag(s, COLORS.terracotta, 0, 0, 1); } },
+      { name: 'Batch 201', collection: 'Nyeri', colour: 'Forest', price: '$18', build: function(s){ return buildBag(s, COLORS.forest, 0, 0, 1); } },
+      { name: 'Batch 198', collection: 'Antigua', colour: 'Charcoal', price: '$16', build: function(s){ return buildBag(s, COLORS.charcoal, 0, 0, 1); } }
+    ]
+  };
 
-  function heroLoop(){
-    if (!dragging){
-      heroGroup.rotation.y += reduced ? 0 : Math.max(0.0025, Math.abs(velX)) * (velX < 0 ? -1 : 1) * 0.5 + (reduced ? 0 : 0.0025);
-      velX *= 0.96;
-    }
-    heroRenderer.render(heroScene, heroCamera);
-    requestAnimationFrame(heroLoop);
-  }
-  requestAnimationFrame(heroLoop);
+  var thumbCanvas = document.createElement('canvas');
+  thumbCanvas.width = 640; thumbCanvas.height = 640;
 
-  // ---- Pre-rendered product thumbnails for the rail ----
-  var thumbRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
-  thumbRenderer.setSize(480, 480);
-  thumbRenderer.setPixelRatio(2);
-  var thumbCamera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
-  thumbCamera.position.set(0, 0.5, 5.4);
-  thumbCamera.lookAt(0, 0, 0);
+  Object.keys(CATALOG).forEach(function(gridId){
+    var grid = document.getElementById(gridId);
+    CATALOG[gridId].forEach(function(item){
+      var renderer = renderStatic(thumbCanvas, function(){
+        var scene = makeScene();
+        item.build(scene);
+        return scene;
+      }, { w: 640, h: 640, camX: 2.6, camY: 1.8, camZ: 5.6, lookY: 0.6, rotY: 0.5 });
+      var url = renderer.domElement.toDataURL('image/png');
 
-  function renderThumb(product){
-    var scene = makeScene();
-    var group = new THREE.Group();
-    group.rotation.y = 0.6;
-    group.rotation.x = 0.05;
-    scene.add(group);
-    product.build(group, product.color);
-    thumbRenderer.render(scene, thumbCamera);
-    return thumbRenderer.domElement.toDataURL('image/png');
-  }
-
-  var rail = document.getElementById('rail');
-  PRODUCTS.forEach(function(product){
-    var url = renderThumb(product);
-    var card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML =
-      '<div class="product-thumb"><img src="' + url + '" alt="' + product.name + '"></div>' +
-      '<div class="product-info">' +
-        '<div class="product-name">' + product.name + '</div>' +
-        '<div class="product-meta">' + product.meta + '</div>' +
-        '<div class="product-price">' + product.price + '</div>' +
-      '</div>';
-    rail.appendChild(card);
+      var card = document.createElement('a');
+      card.className = 'product-card';
+      card.href = '#';
+      card.innerHTML =
+        '<div class="product-thumb"><img src="' + url + '" alt="' + item.name + '"></div>' +
+        '<dl class="product-meta">' +
+          '<dt>Collection</dt><dd>' + item.collection + '</dd>' +
+          '<dt>Colour</dt><dd>' + item.colour + '</dd>' +
+          '<dt>Price</dt><dd>' + item.price + '</dd>' +
+          '<span class="full">' + item.name + '</span>' +
+        '</dl>';
+      grid.appendChild(card);
+    });
   });
 })();
 </script>
